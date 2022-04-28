@@ -1,0 +1,12 @@
+body{
+    font-family: georgia, serif;
+    font-size: 1em;
+  }
+  .wow {
+    width: 100px;
+  }
+  h1{
+    text-align: center;
+    color: green;
+    font-size: 3em;
+  }
