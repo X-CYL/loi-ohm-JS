@@ -1,12 +1,23 @@
 body{
     font-family: georgia, serif;
     font-size: 1em;
+    background-color: burlywood;
   }
   .wow {
     width: 100px;
   }
-  h1{
-    text-align: center;
-    color: green;
-    font-size: 3em;
+  .input{
+    max-width: 160px;
+    height: 70px;
+
   }
+  button{
+    margin-top: 15px;
+  }
+  .result{
+    width: 100px;
+    height: 80px;
+    background-color: rgb(86, 241, 99);
+    
+  }
+  
