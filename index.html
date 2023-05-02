@@ -11,41 +11,42 @@
 
 <body>
   <h1 class="fs-1 text-success text-center">LA LOI D OHM</h1>
-  <form method="#" action="..."></form>
+  <form method="#" action="..." id="inputForm">
       <div class="container">
         <div class="row">
           <div class="col">
             <div class="row justify-content-around text-center">
               <label for ="tension">Tension</label>
-              <input class="input rounded-3" type="number" id="tension" name= "tension" placeholder = "volts" required>
+              <input class="input rounded-3" name= "tension">
             </div>
           </div>
           <div class="col">
             <div class="row justify-content-around text-center">
               <label for ="resistance">Résistance</label>
-              <input class="input rounded-3" type="number" id="resistance" name= "resistance" placeholder = "ohms" required>
+              <input class="input rounded-3" type="number" name= "resistance">
             </div>
           </div>
           <div class="col">
             <div class="row justify-content-around text-center">
               <label for ="intensite">Intensité</label>
-              <input class="input rounded-3" type="number" id="intensité" name= "intensite" placeholder = "amperes" required>
+              <input class="input rounded-3" type="number" name= "intensite">
             </div>
           </div>
         </div>
       </div>
     </form>
+    <p class="fs-3 text-danger" id="errorMsg"></p>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col col-4 text-center">
-          <button type="submit">Envoyer les données</button>
-          <button type="reset"> reset</button>
+          <button type="button" onclick="calculFormules()" id="calculer">Calculer</button>
+          <button type="button" id="clear"> reset</button>
           </div>
           <div class="row text-center">
-            <output class="fs-4 text-light" type="number" id="result" name="resultat">resultat de l'opération</output>
+            <output class="fs-4 text-light" type="number"  name="resultat">resultat de l'opération</output>
           </div>
           <div class="row text-center justify-content-around">
-            <span class="result rounded-3 border border-warning border border-3 text-danger fs-1 fw-bold" id="result">7</span>
+            <span class="result rounded-3 border border-warning border border-3 text-danger fs-1 fw-bold" id="result"></span>
           </div>
         </div>
       </div>

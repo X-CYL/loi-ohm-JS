@@ -1,27 +1,30 @@
-//le but de ce dossier est de creer une petite appli de calcul de la loi d'hom
-//la loi d'ohm s'écrit comme cela:
-// U=RI ou U est la tension R est la resistance I est l'intensité
-//il va falloir gerer le fait de ne pas faire le calcul s il y a deux inconnues.
+let calcButton = document.getElementById("calculer");
+let vider = document.getElementById("clear");
+
+//recupérer les valeurs des champs inputs dans la variablr "formCalc"
 
 
-function calcLoiOhm (u, r, i){
-    if (u == 0 & i == 0 || r == 0 & i == 0 || r == 0 & u == 0){
-        console.log('failed to clac the function, two values unknown');
-    }
-    else {
-        if (u == 0){
-            let result = (r*i);
-            console.log (`the tension value is : ${result.toFixed(2)} volts`);
-        }
-        else if (r == 0){
-            let result = (u/i);
-            console.log (`the resistance value is : ${result.toFixed(2)} ohms`);
-        }
-        else if (i == 0){
-            let result = (u/r);
-            console.log (`the intensity value is : ${result.toFixed(2)} ampères`);
-        }
-    }
+//calculer 
+function calculFormules(){
+    //recup du formulaire dans une variable, ici (formCalc)
+    let formCalc = document.getElementById("inputForm");
+    //on transforme le formulaire en objet dans lequel on peut recupérer chaque champ input par son name via get dans l'objet
+    let formObj = new FormData(formCalc);
+    let u = formObj.get("tension");
+    let r = formObj.get("resistance");
+    let i = formObj.get("intensite");
+
+    //on lance le calcul
+    let calculTension = r * i;
+    let calculResistance = u / i;
+    let calculIntensite = u / r;
+    document.getElementById('result').innerText = calculIntensite.toFixed(2) +'A'; // exemple
+
+    //on mets les conditions de calculs selon les champs remplis
+    
 }
 
-calcLoiOhm(27, 0, 9);
+//affecter la fonction de calcul au bouton "calculer"
+
+//calcButton.addEventListener("click", calculFormules);
+
