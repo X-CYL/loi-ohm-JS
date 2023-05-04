@@ -15,7 +15,8 @@ body{
     margin-top: 15px;
   }
   .result{
-    width: 100px;
+    display:block;
+    max-width: 150px;
     height: 80px;
     background-color: rgb(86, 241, 99);
     

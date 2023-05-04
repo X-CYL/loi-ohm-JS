@@ -21,6 +21,19 @@ function calculFormules(){
     document.getElementById('result').innerText = calculIntensite.toFixed(2) +'A'; // exemple
 
     //on mets les conditions de calculs selon les champs remplis
+    if(r !== '' && i !== ''){
+        document.getElementById('result').innerText = calculTension.toFixed(2) +'Volts';
+    }
+    else if(u !== '' && i !== ''){
+        document.getElementById('result').innerText = calculResistance.toFixed(2) +'Ohms';
+    }
+    else if(u !== '' && r !== ''){
+        document.getElementById('result').innerText = calculIntensite.toFixed(2) +'Amps';
+    }
+    else{
+        alert("vous n'avez pas bien rempli le formulaire");
+        document.getElementById('result').innerText = 'Null';
+    }
     
 }
 
