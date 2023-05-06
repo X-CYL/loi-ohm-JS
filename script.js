@@ -7,6 +7,7 @@ let error = "Vous n'avez pas rempli les champs de formulaire"
 function resetForm() {
     document.getElementById("inputForm").reset();
     document.getElementById("result").innerText = "";
+    document.getElementById('unit').innerText = "";
   }
 
 //calculer 
