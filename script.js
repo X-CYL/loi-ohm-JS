@@ -2,6 +2,12 @@ let calcButton = document.getElementById("calculer");
 let vider = document.getElementById("clear");
 let error = "Vous n'avez pas rempli les champs de formulaire"
 //let iconError = <i class="bi bi-emoji-frown"></i>;
+tension = document.getElementById('tension');
+intensite = document.getElementById('intensite');
+resistance = document.getElementById('resistance');
+
+disabledInputs()
+
 
 //griser le champ input vide (empecher la saisie) lorsque 2 champs sont remplis
 function resetForm() {
@@ -38,6 +44,7 @@ function calculFormules(){
         document.getElementById('result').innerText = calculIntensite.toFixed(2);
         document.getElementById('unit').innerText = "Ampères";
     }
+    
     else{
         //alert("vous n'avez pas bien rempli le formulaire");
         document.getElementById("result").innerText = "####";
@@ -49,7 +56,20 @@ function calculFormules(){
 vider.addEventListener('click', resetForm);
 calcButton.addEventListener('click',calculFormules)
 
-//affecter la fonction de calcul au bouton "calculer"
 
-//calcButton.addEventListener("click", calculFormules);
-
+function disabledInputs(){
+    if(tension === '' && resistance === '' && intensite === ''){ 
+        tension.disabled = false;
+        resistance.disabled = false;
+        intensite.disabled = false; 
+    }
+    else if(tension !== '' && intensite !== '' && resistance ===''){
+        resistance.disabled = true;
+    }
+    else if(tension !== '' && resistance !== '' && intensite ===''){
+        intensite.disabled = true;
+    }
+    else if(resistance !== '' && intensite !== '' && tension ===''){
+        tension.disabled = true;
+    }
+}
