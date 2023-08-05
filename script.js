@@ -1,75 +1,81 @@
 let calcButton = document.getElementById("calculer");
 let vider = document.getElementById("clear");
-let error = "Vous n'avez pas rempli les champs de formulaire"
+let error = "Vous n'avez pas rempli les champs de formulaire";
 //let iconError = <i class="bi bi-emoji-frown"></i>;
-tension = document.getElementById('tension');
-intensite = document.getElementById('intensite');
-resistance = document.getElementById('resistance');
-
-disabledInputs()
 
 
-//griser le champ input vide (empecher la saisie) lorsque 2 champs sont remplis
+//griser le champ input vide (empecher la saisie) lorsque 2 des 3 champs sont remplis
+
+function ctrlInputs() {
+    let u = document.getElementById("tension");
+    let i = document.getElementById("intensite");
+    let r = document.getElementById("resistance");
+
+  let disabled = addEventListener("input", function () {
+    if (u.value !== "" && r.value !== "") {
+        i.setAttribute("disabled", "");
+    } else {
+        i.removeAttribute("disabled", "");
+    }
+    if (i.value !== "" && r.value !== "") {
+      u.setAttribute("disabled", "");
+    } else {
+      u.removeAttribute("disabled", "");
+    }
+    if (u.value !== "" && i.value !== "") {
+      r.setAttribute("disabled", "");
+    } else {
+      r.removeAttribute("disabled", "");
+    }
+    
+  });
+}
+
+// reset des champs
 function resetForm() {
-    document.getElementById("inputForm").reset();
-    document.getElementById("result").innerText = "";
-    document.getElementById('unit').innerText = "";
+  document.getElementById("inputForm").reset();
+  document.getElementById("result").innerText = "";
+  document.getElementById("unit").innerText = "";
+  tension.removeAttribute("disabled", "");
+  resistance.removeAttribute("disabled", "");
+  intensite.removeAttribute("disabled", "");
+}
+
+ctrlInputs();
+
+//calculer la formule
+function calculFormules() {
+  //recup du formulaire dans une variable, ici (formCalc)
+  let formCalc = document.getElementById("inputForm");
+  //on transforme le formulaire en objet dans lequel on peut recupérer chaque champ input par son name via get dans l'objet
+  let formObj = new FormData(formCalc);
+  let tension = formObj.get("tension");
+  let resistance = formObj.get("resistance");
+  let intensite = formObj.get("intensite");
+
+  
+  //on lance le calcul
+
+  //on mets les conditions de calculs selon les champs remplis
+  if (tension !== "" && resistance !== "") {
+    let calculIntensite = tension / resistance;
+    document.getElementById("result").innerText = calculIntensite.toFixed(2);
+    document.getElementById("unit").innerText = "Ampères pour l'intensité";
+  } else if (intensite !== "" && resistance !== "") {
+    let calculTension = resistance * intensite;
+    document.getElementById("result").innerText = calculTension.toFixed(2);
+    document.getElementById("unit").innerText = "Volts pour la tension";
+  } else if (tension !== "" && intensite !== "") {
+    let calculResistance = tension / intensite;
+    document.getElementById("result").innerText = calculResistance.toFixed(2);
+    document.getElementById("unit").innerText = "Ohms pour la résistance";
+  } else {
+    //alert("vous n'avez pas bien rempli le formulaire");
+    document.getElementById("result").innerText = "####";
+    document.getElementById("unit").innerText = error;
+    document.getElementById("unit").style.color = "red";
   }
-
-//calculer 
-function calculFormules(){
-    //recup du formulaire dans une variable, ici (formCalc)
-    let formCalc = document.getElementById("inputForm");
-    //on transforme le formulaire en objet dans lequel on peut recupérer chaque champ input par son name via get dans l'objet
-    let formObj = new FormData(formCalc);
-    let u = formObj.get("tension");
-    let r = formObj.get("resistance");
-    let i = formObj.get("intensite");
-
-    //on lance le calcul
-    let calculTension = r * i;
-    let calculResistance = u / i;
-    let calculIntensite = u / r;
-
-    //on mets les conditions de calculs selon les champs remplis
-    if(r !== '' && i !== ''){
-        document.getElementById('result').innerText = calculTension.toFixed(2);
-        document.getElementById('unit').innerText = "Volts";
-    }
-    else if(u !== '' && i !== ''){
-        document.getElementById('result').innerText = calculResistance.toFixed(2);
-        document.getElementById('unit').innerText = "Ohms";
-    }
-    else if(u !== '' && r !== ''){
-        document.getElementById('result').innerText = calculIntensite.toFixed(2);
-        document.getElementById('unit').innerText = "Ampères";
-    }
-    
-    else{
-        //alert("vous n'avez pas bien rempli le formulaire");
-        document.getElementById("result").innerText = "####";
-        document.getElementById('unit').innerText = error;
-        document.getElementById('unit').style.color = "red";
-    }
-    
 }
-vider.addEventListener('click', resetForm);
-calcButton.addEventListener('click',calculFormules)
 
-
-function disabledInputs(){
-    if(tension === '' && resistance === '' && intensite === ''){ 
-        tension.disabled = false;
-        resistance.disabled = false;
-        intensite.disabled = false; 
-    }
-    else if(tension !== '' && intensite !== '' && resistance ===''){
-        resistance.disabled = true;
-    }
-    else if(tension !== '' && resistance !== '' && intensite ===''){
-        intensite.disabled = true;
-    }
-    else if(resistance !== '' && intensite !== '' && tension ===''){
-        tension.disabled = true;
-    }
-}
+calcButton.addEventListener("click", calculFormules);
+vider.addEventListener("click", resetForm);
