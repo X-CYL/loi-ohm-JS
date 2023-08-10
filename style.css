@@ -13,9 +13,10 @@ body{
 
   }
   button{
-    margin-top: 15px;
+    margin-top: 5px;
   }
   .result{
+    margin-top: 20px;
     display:block;
     min-width: 150px;
     min-height: 60px;
@@ -28,9 +29,53 @@ body{
     height: 60px;
     background: #92e3f7;
 }
+#textResult{
+  margin-top: 15px;
+}
 
+.toggle {
+  margin-top: 20px;
+}
+.toggle {
+  margin-left: 75px;
+}
+.toggle input[type=checkbox] {
+  display: none;
+}
+.toggle label {
+  color: #fbe201;
+  position: relative;
+}
+.toggle input[type=checkbox] + label::before {
+  content: " ";
+  display: block;
+  height: 18px;
+  width: 45px;
+  border: 1px solid #4281A4;
+  border-radius: 9px;
+  position: absolute;
+  top: 0px;
+  left: -65px;
+  background: #4281A4;
+}
+.toggle input[type=checkbox] + label::after {
+  content: " ";
+  display: block;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #FF686B;
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  left: -75px;
+  background: #FF686B;
+  transition: all 0.3s ease-in;
+}
+.toggle input[type=checkbox]:checked + label::after {
+  left: -40px;
+  transition: all 0.3s ease-in;
+}
 
-  
   
   
 

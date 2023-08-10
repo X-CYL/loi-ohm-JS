@@ -39,6 +39,14 @@
         </div>
       </div>
     </form>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="toggle text-center">
+          <input type="checkbox" id="temp" class="checkbox">
+          <label for="temp" class="label">3 ph</label>
+        </div>
+      </div>
+    </div>
     <p class="fs-3 text-danger" id="errorMsg"></p>
     <div class="container">
       <div class="row justify-content-center">
@@ -47,14 +55,13 @@
           <button class="btn btn-warning" type="button" id="clear"> reset</button>
           </div>
           <div class="row text-center">
-            <output class="fs-4 text-light" type="number" id="textResult" name="resultat">resultat de l'opération</output>
+            <output class="fs-4 text-light" type="number" id="textResult" name="resultat">resultat du calcul</output>
           </div>
           <div class="container d-flex justify-content-center">
             <div class="row align-items-center text-center">
               <div>
                 <span class="result rounded-3 border border-warning border border-3 text-danger p-2 fs-2 fw-bold" id="result"></span>
               </div>
-              
             </div>
           </div>
           <div class="text-center">
@@ -64,6 +71,7 @@
       </div>
     </div>
   </form>
+  <p class="fs-6 text-center mt-5">Les résultats obtenus ne vous dispensent pas de les faire valider par d'autres sources.</p>
   <footer class="footer">
       <div class="container">
         <div class="row text-center">

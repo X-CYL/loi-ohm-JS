@@ -1,6 +1,9 @@
 let calcButton = document.getElementById("calculer");
 let vider = document.getElementById("clear");
 let error = "Il faut remplir au moins deux champs de formulaire";
+let troisPhases = 1.732;
+console.log(troisPhases)
+let checkbox = document.getElementById("temp");
 //let iconError = <i class="bi bi-emoji-frown"></i>;
 
 //griser le champ input vide (empecher la saisie) lorsque 2 des 3 champs sont remplis
@@ -30,13 +33,6 @@ addEventListener("input", function () {
 }
 
 
-function addErrorIcon(){
-    let newi = document.createElement("p");
-    let pContent = document.createTextNode("il faut que ca fonctionne!!!");
-    newi.appendChild(pContent);
-    let currentSpan = document.getElementById("result");
-    document.body.insertBefore(newi, currentSpan)
-}
 // reset des champs
 function resetForm() {
   document.getElementById("inputForm").reset();
@@ -49,16 +45,9 @@ function resetForm() {
 
 ctrlInputs();
 
-//calculer la formule
+//calculer la formule en mono
 function calculFormules() {
-  //recup du formulaire dans une variable, ici (formCalc)
-  /*let formCalc = document.getElementById("inputForm");
-  //on transforme le formulaire en objet dans lequel on peut recupérer chaque champ input par son name via get dans l'objet
-  let formObj = new FormData(formCalc);
-  let tension = formObj.get("tension");
-  let resistance = formObj.get("resistance");
-  let intensite = formObj.get("intensite");
-*/
+  
 let tension = document.getElementById('tension').value;
 let resistance = document.getElementById('resistance').value;
 let intensite = document.getElementById('intensite').value;
@@ -84,12 +73,44 @@ let intensite = document.getElementById('intensite').value;
     document.getElementById("result").innerHTML ="<img \src=./pics/badIcon.png\ >"
   }
 }
+// calcul en triphasé
+function calculFormule3ph() {
+  
+let tension = document.getElementById('tension').value;
+let resistance = document.getElementById('resistance').value;
+let intensite = document.getElementById('intensite').value;
+  //on lance le calcul
 
-calcButton.addEventListener("click", calculFormules);
+  //on mets les conditions de calculs selon les champs remplis
+  if (tension !== "" && resistance !== "") {
+    let calculIntensite = tension / (resistance * troisPhases);
+    document.getElementById("result").innerText = calculIntensite.toFixed(2);
+    document.getElementById("unit").innerText = "Ampères pour l'intensité en tri";
+  } else if (intensite !== "" && resistance !== "") {
+    let calculTension = resistance * (intensite * troisPhases);
+    document.getElementById("result").innerText = calculTension.toFixed(2);
+    document.getElementById("unit").innerText = "Volts pour la tension en tri";
+  } else if (tension !== "" && intensite !== "") {
+    let calculResistance = tension / (intensite *troisPhases);
+    document.getElementById("result").innerText = calculResistance.toFixed(2);
+    document.getElementById("unit").innerText = "Ohms pour la résistance en tri";
+  } else {
+    //alert("vous n'avez pas bien rempli le formulaire");
+    document.getElementById("unit").innerText = error;
+    document.getElementById("unit").style.color = "red";
+    document.getElementById("result").innerHTML ="<img \src=./pics/badIcon.png\ >"
+  }
+}
+
+//calculer selon que la tension est monophasée ou triphasée
+function calculsValeurs(){
+  if(checkbox.checked){
+    calculFormule3ph();
+  } else {
+    calculFormules();
+  }
+}
+
+calcButton.addEventListener("click", calculsValeurs);   
 vider.addEventListener("click", resetForm);
 
-let newi = document.createElement("p");
-let pContent = document.createTextNode("il faut que ca fonctionne!!!");
-newi.appendChild(pContent);
-let currentSpan = document.getElementById("result");
-document.body.insertBefore(newi, currentSpan);
