@@ -1,6 +1,6 @@
 let calcButton = document.getElementById("calculer");
 let vider = document.getElementById("clear");
-let error = "Vous n'avez pas rempli les champs de formulaire";
+let error = "Il faut remplir au moins deux champs de formulaire";
 //let iconError = <i class="bi bi-emoji-frown"></i>;
 
 //griser le champ input vide (empecher la saisie) lorsque 2 des 3 champs sont remplis
@@ -29,6 +29,14 @@ addEventListener("input", function () {
 });
 }
 
+
+function addErrorIcon(){
+    let newi = document.createElement("p");
+    let pContent = document.createTextNode("il faut que ca fonctionne!!!");
+    newi.appendChild(pContent);
+    let currentSpan = document.getElementById("result");
+    document.body.insertBefore(newi, currentSpan)
+}
 // reset des champs
 function resetForm() {
   document.getElementById("inputForm").reset();
@@ -71,11 +79,17 @@ let intensite = document.getElementById('intensite').value;
     document.getElementById("unit").innerText = "Ohms pour la résistance";
   } else {
     //alert("vous n'avez pas bien rempli le formulaire");
-    document.getElementById("result").innerText = "####";
     document.getElementById("unit").innerText = error;
     document.getElementById("unit").style.color = "red";
+    document.getElementById("result").innerHTML ="<img \src=./pics/badIcon.png\ >"
   }
 }
 
 calcButton.addEventListener("click", calculFormules);
 vider.addEventListener("click", resetForm);
+
+let newi = document.createElement("p");
+let pContent = document.createTextNode("il faut que ca fonctionne!!!");
+newi.appendChild(pContent);
+let currentSpan = document.getElementById("result");
+document.body.insertBefore(newi, currentSpan);
