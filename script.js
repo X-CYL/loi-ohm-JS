@@ -114,3 +114,10 @@ function calculsValeurs(){
 calcButton.addEventListener("click", calculsValeurs);   
 vider.addEventListener("click", resetForm);
 
+const leRoot = document.querySelector('#root')
+
+//exercice
+
+//const afficher = document.createElement('span');
+    //afficher.innerText ="IL FAUT FAIRE ATTENTION";
+//leRoot.appendChild(afficher);
