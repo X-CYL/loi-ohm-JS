@@ -127,7 +127,8 @@ function calculsValeurs() {
     calculFormules();
   }
 }
-byPassPhase();
+//byPassPhase();
+phaseDisplay.innerText = currentMono;
 
 calcButton.addEventListener("click", calculsValeurs);
 vider.addEventListener("click", resetForm);
